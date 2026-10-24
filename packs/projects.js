@@ -1,0 +1,51 @@
+export default {
+  id: "projects",
+  title: "Proyectos",
+  description: "Algunos proyectos públicos.",
+  kind: "links",
+  brand: "Jaime Alonso",
+  items: [
+    {
+      id: "magic-envelope",
+      label: "Magic Envelope",
+      subtitle: "Invitaciones con sobre sellado",
+      href: "https://magic-envelope.com/",
+      icon: "box",
+    },
+    {
+      id: "quickeys",
+      label: "Quickeys",
+      subtitle: "quickeys.app",
+      href: "https://quickeys.app/",
+      icon: "keyboard",
+    },
+    {
+      id: "circuit-lab",
+      label: "Circuit Lab",
+      subtitle: "Circuitos en el navegador",
+      href: "https://github.com/JaimeAlonsoGA/circuit-lab",
+      icon: "circuit",
+    },
+    {
+      id: "grasshopper",
+      label: "Grasshopper",
+      subtitle: "Pasa conversaciones entre agentes",
+      href: "https://github.com/JaimeAlonsoGA/grasshopper",
+      icon: "code",
+    },
+    {
+      id: "alchimix",
+      label: "Alchimix",
+      subtitle: "Cócteles · React Native",
+      href: "https://github.com/JaimeAlonsoGA/alchimix",
+      icon: "flask",
+    },
+    {
+      id: "portfolio",
+      label: "jaimealonso.dev",
+      subtitle: "Portfolio",
+      href: "https://jaimealonso.dev/",
+      icon: "globe",
+    },
+  ],
+};
