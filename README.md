@@ -2,8 +2,6 @@
 
 Hub compartible de Jaime Alonso. Un URL por pack; packs aislados (sin nav al home).
 
-Live: https://jam.web.app
-
 ## Packs
 
 | Path | Qué |
@@ -18,7 +16,7 @@ Live: https://jam.web.app
 
 ## Params (music)
 
-- Default: todos → `https://jam.web.app/music`
+- Default: todos → `https://jaimeshare.vercel.app/music`
 - Uno: `?a=jaime2000`
 - Combo: `?a=jaime2000,spirithz`
 - Aliases: `artists` / `artist`; separadores `,` o `|`
@@ -29,4 +27,4 @@ Crea `packs/<id>.js` exportando `{ id, title, description, kind, items }`, impó
 
 ## Deploy
 
-Firebase Hosting (primary): `firebase deploy --only hosting`
+Estático. `vercel.json` reescribe rutas SPA y deja `/img/*` estático.
