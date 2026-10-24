@@ -1,12 +1,10 @@
-/** @typedef {{ key: string, label: string, href: string }} PlatformLink */
-/** @typedef {{ id: string, name: string, subtitle: string, image: string, links: Record<string, string> }} Artist */
+/** @typedef {{ id: string, name: string, image: string, links: Record<string, string> }} Artist */
 
 /** @type {Artist[]} */
 export const artists = [
   {
     id: "jaime2000",
     name: "Jaime 2000",
-    subtitle: "Indie pop",
     image: "/img/cover-2000-jaimes.jpg",
     links: {
       tidal: "https://tidal.com/artist/87677903",
@@ -20,7 +18,6 @@ export const artists = [
   {
     id: "spirithz",
     name: "Spirithz",
-    subtitle: "Trance",
     image: "/img/spirithz.jpg",
     links: {
       tidal: "https://tidal.com/artist/36347288",
@@ -34,8 +31,7 @@ export const artists = [
   },
   {
     id: "quarteteuc",
-    name: "The Symphonic Quarteteuc",
-    subtitle: "Medieval tavern",
+    name: "Quarteteuc",
     image: "/img/cover-tavern.jpg",
     links: {
       tidal: "https://tidal.com/artist/50502492",
@@ -49,17 +45,9 @@ export const artists = [
 export default {
   id: "music",
   title: "Música",
-  description: "Escúchame en tu plataforma favorita.",
   kind: "artists",
-  brand: "Jaime Alonso",
+  icon: "pack-music",
   items: artists,
   filterParam: "a",
   filterAliases: ["artists", "artist"],
-  chips: [
-    { label: "Todos", ids: "all" },
-    { label: "Jaime 2000", ids: ["jaime2000"] },
-    { label: "Spirithz", ids: ["spirithz"] },
-    { label: "Quarteteuc", ids: ["quarteteuc"] },
-    { label: "Jaime + Spirithz", ids: ["jaime2000", "spirithz"] },
-  ],
 };
