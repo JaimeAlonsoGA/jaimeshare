@@ -6,7 +6,7 @@ mkdir -p img/icons
 BASE=https://jamx.web.app
 for f in amazon-music.png apple-music.png deezer.png github.png gmail.png linkedin.png \
          pack-files.png pack-music.png pack-photos.png pack-pro.png portfolio.png \
-         spotify.png tidal.png youtube-music.png; do
+         spotify.png tidal.png youtube-music.png share.png; do
   curl -fsSL "$BASE/img/icons/$f" -o "img/icons/$f"
 done
 for f in cover-2000-jaimes.jpg cover-aura.jpg cover-criaturas.jpg cover-depths.jpg \
