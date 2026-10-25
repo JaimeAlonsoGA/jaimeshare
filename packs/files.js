@@ -1,8 +1,8 @@
 export default {
   id: "files",
-  title: "Archivos",
+  title: "Files",
   kind: "files",
   icon: "pack-files",
   items: [],
-  empty: "Pronto.",
+  empty: "Coming soon.",
 };

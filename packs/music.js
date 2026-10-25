@@ -44,7 +44,7 @@ export const artists = [
 
 export default {
   id: "music",
-  title: "Música",
+  title: "Music",
   kind: "artists",
   icon: "pack-music",
   items: artists,
