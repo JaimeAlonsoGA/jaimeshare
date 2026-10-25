@@ -120,7 +120,7 @@ function renderHub() {
           (pack) => `
             <li>
               <a href="/${esc(pack.id)}">
-                ${iconImg(pack.icon || "pack-projects", pack.title)}
+                ${iconImg(pack.icon || "pack-pro", pack.title)}
                 <span class="name">${esc(pack.title)}</span>
               </a>
             </li>`
@@ -141,7 +141,7 @@ function renderArtists(pack) {
 
   const view = document.querySelector("#view");
   if (!artists.length) {
-    view.innerHTML = emptyState("Nada aquí.");
+    view.innerHTML = emptyState("Nothing here.");
     return;
   }
   view.innerHTML = `<div class="stack">${artists.map(artistCard).join("")}</div>`;
@@ -152,12 +152,12 @@ function renderLinks(pack) {
   const view = document.querySelector("#view");
   view.innerHTML = pack.items.length
     ? linkRows(pack.items)
-    : emptyState(pack.empty || "Pronto.");
+    : emptyState(pack.empty || "Coming soon.");
 }
 
 function renderStub(pack) {
   document.title = pack.title;
-  document.querySelector("#view").innerHTML = emptyState(pack.empty || "Pronto.");
+  document.querySelector("#view").innerHTML = emptyState(pack.empty || "Coming soon.");
 }
 
 function render() {
@@ -169,7 +169,7 @@ function render() {
   const pack = getPack(id);
   if (!pack) {
     document.title = "404";
-    document.querySelector("#view").innerHTML = emptyState("No existe.");
+    document.querySelector("#view").innerHTML = emptyState("Not found.");
     return;
   }
   if (pack.kind === "artists") renderArtists(pack);
