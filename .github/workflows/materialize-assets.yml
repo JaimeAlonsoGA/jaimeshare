@@ -11,11 +11,17 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: materialize-assets
+  cancel-in-progress: false
+
 jobs:
   materialize:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Fetch icons and covers from jamx.web.app
         run: |
@@ -39,7 +45,6 @@ jobs:
             curl -fsSL "$BASE/img/$f" -o "img/$f"
             echo "ok img/$f ($(wc -c < "img/$f") bytes)"
           done
-          # drop any accidental test artifacts
           rm -f img/icons/_tiny-test.png
 
       - name: Commit binaries
@@ -50,7 +55,9 @@ jobs:
           git add img
           if git diff --staged --quiet; then
             echo "No asset changes"
-          else
-            git commit -m "Add img binaries (icons + covers) for hub maintainers"
-            git push
+            exit 0
           fi
+          git commit -m "Add img binaries (icons + covers) for hub maintainers"
+          # Rebase onto latest main in case other commits landed during the run
+          git pull --rebase origin main
+          git push origin HEAD:main
