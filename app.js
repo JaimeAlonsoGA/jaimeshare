@@ -1,4 +1,5 @@
 import { packs, getPack } from "./packs/index.js";
+import { shareArtist, copyArtistLink } from "./share.js";
 
 const PLATFORMS = [
   { key: "tidal", label: "TIDAL", icon: "tidal" },
@@ -54,7 +55,7 @@ function parseArtistFilter(pack) {
 }
 
 function platformRows(artist) {
-  return PLATFORMS.map((platform) => {
+  const rows = PLATFORMS.map((platform) => {
     const href = artist.links[platform.key];
     if (!href) return "";
     return `
@@ -65,11 +66,22 @@ function platformRows(artist) {
         </a>
       </li>`;
   }).join("");
+
+  // Share sits inside the same streaming-links menu
+  const share = `
+      <li>
+        <button type="button" class="share-btn" data-share="${esc(artist.id)}" aria-label="Share ${esc(artist.name)}">
+          ${iconImg("share", "Share")}
+          <span class="name">Share</span>
+        </button>
+      </li>`;
+
+  return rows + share;
 }
 
 function artistCard(artist) {
   return `
-    <article class="card" id="${esc(artist.id)}">
+    <article class="card" id="${esc(artist.id)}" data-artist="${esc(artist.id)}">
       <div class="cover">
         <img src="${esc(artist.image)}" alt="${esc(artist.name)}" width="800" height="800" />
       </div>
@@ -106,7 +118,7 @@ function visibleHubPacks() {
   return packs.filter((p) => {
     if (p.kind === "artists") return p.items?.length;
     if (p.kind === "links") return p.items?.length;
-    return false; // hide empty stubs from hub
+    return false;
   });
 }
 
@@ -127,6 +139,15 @@ function renderHub() {
         )
         .join("")}
     </ul>`;
+}
+
+function findArtist(id) {
+  for (const pack of packs) {
+    if (pack.kind !== "artists") continue;
+    const hit = pack.items?.find((a) => a.id === id);
+    if (hit) return hit;
+  }
+  return null;
 }
 
 function renderArtists(pack) {
@@ -176,6 +197,29 @@ function render() {
   else if (pack.kind === "links") renderLinks(pack);
   else renderStub(pack);
 }
+
+document.addEventListener("click", async (ev) => {
+  const btn = ev.target.closest("[data-share]");
+  if (!btn) return;
+  ev.preventDefault();
+  const id = btn.getAttribute("data-share");
+  const artist = findArtist(id);
+  if (!artist) return;
+  // Secondary: Alt/Option → copy deep link only
+  if (ev.altKey || ev.metaKey) {
+    await copyArtistLink(artist);
+    return;
+  }
+  await shareArtist(artist);
+});
+
+document.addEventListener("contextmenu", async (ev) => {
+  const btn = ev.target.closest("[data-share]");
+  if (!btn) return;
+  ev.preventDefault();
+  const artist = findArtist(btn.getAttribute("data-share"));
+  if (artist) await copyArtistLink(artist);
+});
 
 window.addEventListener("popstate", render);
 render();
