@@ -1,5 +1,15 @@
 {
   "projects": {
-    "default": "jam"
-  }
+    "default": "jaime360"
+  },
+  "targets": {
+    "jaime360": {
+      "hosting": {
+        "jamx": [
+          "jamx"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }
