@@ -1,4 +1,4 @@
-/** @typedef {{ id: string, name: string, image: string, links: Record<string, string> }} Artist */
+/** @typedef {{ id: string, name: string, image: string, links: Record<string, string>, tracks?: string[], album?: string }} Artist */
 
 /** @type {Artist[]} */
 export const artists = [
@@ -6,6 +6,18 @@ export const artists = [
     id: "jaime2000",
     name: "Jaime 2000",
     image: "/img/cover-2000-jaimes.jpg",
+    album: "2000 Jaimes",
+    tracks: [
+      "Unlocking Infinite Powers",
+      "Free u fool",
+      "Expand ur limits",
+      "Me fui, os quiero",
+      "Green tea",
+      "Bioluminescent midnight swim",
+      "Marihuana Satisfaction",
+      "Super Massive Black Hole",
+      "Libra",
+    ],
     links: {
       tidal: "https://tidal.com/artist/87677903",
       spotify: "https://open.spotify.com/artist/0fILFburaL1mArozqNg4uZ",
@@ -19,6 +31,13 @@ export const artists = [
     id: "spirithz",
     name: "Spirithz",
     image: "/img/spirithz.jpg",
+    album: "Criaturas",
+    tracks: [
+      "Spirithz of the depths",
+      "Apertura",
+      "Criaturas del bosque",
+      "Criaturas del mar",
+    ],
     links: {
       tidal: "https://tidal.com/artist/36347288",
       spotify: "https://open.spotify.com/artist/0VIwVTAsQcPt1nkAGj1CNO",
@@ -33,6 +52,18 @@ export const artists = [
     id: "quarteteuc",
     name: "Quarteteuc",
     image: "/img/cover-tavern.jpg",
+    album: "Tavern Whispers",
+    tracks: [
+      "Tribute To The Ferment",
+      "Once Upon A Time",
+      "Fradaginam Hashiban Kin",
+      "Oswald's Odyssey I",
+      "Oswald's Odyssey II",
+      "To Be A Goblin",
+      "Investing In Random",
+      "Interlude",
+      "Goblin Toccata In C",
+    ],
     links: {
       tidal: "https://tidal.com/artist/50502492",
       spotify: "https://open.spotify.com/artist/1eNSjkwrYEQik7qcmzYWc8",

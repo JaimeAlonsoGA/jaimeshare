@@ -1,5 +1,5 @@
 import { packs, getPack } from "./packs/index.js";
-import { shareArtist, copyArtistLink } from "./share.js";
+import { shareArtist } from "./share.js";
 
 const PLATFORMS = [
   { key: "tidal", label: "TIDAL", icon: "tidal" },
@@ -205,20 +205,7 @@ document.addEventListener("click", async (ev) => {
   const id = btn.getAttribute("data-share");
   const artist = findArtist(id);
   if (!artist) return;
-  // Secondary: Alt/Option → copy deep link only
-  if (ev.altKey || ev.metaKey) {
-    await copyArtistLink(artist);
-    return;
-  }
   await shareArtist(artist);
-});
-
-document.addEventListener("contextmenu", async (ev) => {
-  const btn = ev.target.closest("[data-share]");
-  if (!btn) return;
-  ev.preventDefault();
-  const artist = findArtist(btn.getAttribute("data-share"));
-  if (artist) await copyArtistLink(artist);
 });
 
 window.addEventListener("popstate", render);
