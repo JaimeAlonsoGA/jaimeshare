@@ -1,0 +1,56 @@
+name: Materialize assets
+
+# Downloads img/* binaries from the live Firebase host into git,
+# so agents have real PNGs/JPGs without needing a write-capable local PAT.
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/materialize-assets.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  materialize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch icons and covers from jamx.web.app
+        run: |
+          set -euo pipefail
+          mkdir -p img/icons
+          BASE=https://jamx.web.app
+          icons=(
+            amazon-music.png apple-music.png deezer.png github.png gmail.png
+            linkedin.png pack-files.png pack-music.png pack-photos.png pack-pro.png
+            portfolio.png spotify.png tidal.png youtube-music.png
+          )
+          for f in "${icons[@]}"; do
+            curl -fsSL "$BASE/img/icons/$f" -o "img/icons/$f"
+            echo "ok icons/$f ($(wc -c < "img/icons/$f") bytes)"
+          done
+          covers=(
+            cover-2000-jaimes.jpg cover-aura.jpg cover-criaturas.jpg cover-depths.jpg
+            cover-mefui.jpg cover-neo.jpg cover-tavern.jpg jaime-2000.jpg spirithz.jpg
+          )
+          for f in "${covers[@]}"; do
+            curl -fsSL "$BASE/img/$f" -o "img/$f"
+            echo "ok img/$f ($(wc -c < "img/$f") bytes)"
+          done
+          # drop any accidental test artifacts
+          rm -f img/icons/_tiny-test.png
+
+      - name: Commit binaries
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add img
+          if git diff --staged --quiet; then
+            echo "No asset changes"
+          else
+            git commit -m "Add img binaries (icons + covers) for hub maintainers"
+            git push
+          fi

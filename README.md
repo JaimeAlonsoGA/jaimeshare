@@ -14,9 +14,17 @@ Minimal share packs for music and pro links.
 
 Stub packs (`/files`, `/photos`) are registered but hidden from the hub until they have items.
 
-## Icons
+## Icons & images
 
-Official brand PNGs live in `img/icons/`. Keep binaries in git so other agents can maintain the hub.
+Official brand PNGs live in `img/icons/`; artist covers in `img/`.
+
+If binaries are missing locally, either:
+
+```bash
+./scripts/fetch-assets.sh
+```
+
+or run the **Materialize assets** GitHub Action (`.github/workflows/materialize-assets.yml`), which pulls from https://jamx.web.app and commits them to `main`.
 
 ## Deploy
 
